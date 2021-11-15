@@ -18,7 +18,7 @@ class TaskController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Task::class);
 
         // Dans ce repository nous recuperons toutes les donnes 
-        $task = $repository->findAll();
+        $tasks = $repository->findAll();
 
         // Affichage de donnes dans la vue de ma var_dumper
         // dd($task);
@@ -27,7 +27,7 @@ class TaskController extends AbstractController
         // die;
 
         return $this->render('task/index.html.twig', [
-            'controller_name' => 'TaskController',
+            'tasks' => $tasks,
         ]);
     }
 }
