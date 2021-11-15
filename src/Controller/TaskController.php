@@ -21,7 +21,7 @@ class TaskController extends AbstractController
         $task = $repository->findAll();
 
         // Affichage de donnes dans la vue de ma var_dumper
-        dd($task);
+        // dd($task);
 
         // var_dump($task);
         // die;
