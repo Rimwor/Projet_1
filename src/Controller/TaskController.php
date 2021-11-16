@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Task;
 use App\Form\TaskType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TaskController extends AbstractController
 {
     /**
-     * @Route("/task/listing", name="task")
+     * @Route("/task/listing", name="task_listing")
      */
     public function index(): Response
     {
@@ -42,7 +43,24 @@ class TaskController extends AbstractController
     public function createTask(Request $request)
     {
         $task = new Task;
+        $task->setCreatedAt(new \DateTime());
+
         $form = $this->createForm(TaskType::class, $task, []);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $task->setName($form['name']->getData())
+            //     ->setDescription($form['description']->getData())
+            //     ->setDueAt($form['dueAt']->getData())
+            //     ->setTag($form['tag']->getData());
+            // tej części nie potrzebujemy już
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($task);
+            $manager->flush();
+
+            return $this->redirectToRoute('task_listing');
+        }
 
         return $this->render(
             'task/create.html.twig',
