@@ -82,4 +82,17 @@ class TaskController extends AbstractController
             ['form' => $form->createView()]
         );
     }
+
+    /**
+     * @Route("/task/delete/{id}", name="task_delete", requirements={"id"="\d+"})
+     *
+     * @return Response
+     */
+    public function deleteTask(Task $task): Response
+    {
+        $this->manager->remove($task);
+        $this->manager->flush();
+
+        return $this->redirectToRoute('task_listing');
+    }
 }
