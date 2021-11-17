@@ -40,6 +40,9 @@ class TaskController extends AbstractController
      */
     public function index(): Response
     {
+        // Recuperer les informations de l'utilisateur connectee
+        $user = $this->getUser();
+        // dd($user);
 
         // Dans ce repository nous recuperons toutes les donnes 
         $tasks = $this->repository->findAll();
