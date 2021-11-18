@@ -1,0 +1,22 @@
+Symfony is great: I love symfony
+Log in: Log in
+
+auth:
+  msg: You are logged in as
+  logout: Log out
+  login: Log in
+general:
+  name: Name
+  description: Description
+  due_date: Due Date
+  category: Tag
+  button:
+    success: Confirm
+    cancel: Cancel
+    delete: Delete
+    add: Create
+    update: Update
+nav:
+sLengthMenu: Show _MENU_ records per page
+sSearch: Search
+sInfo: Showing _START_ to _END_ of _TOTAL_ records

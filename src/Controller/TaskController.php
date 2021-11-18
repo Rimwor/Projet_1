@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TaskController extends AbstractController
 {
@@ -36,7 +37,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/listing", name="task_listing")
+     * @Route("/{_locale}/task/listing", name="task_listing")
      */
     public function index(): Response
     {
@@ -53,8 +54,8 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/create", name="task_create")
-     * @Route("task/update/{id}", name="task_update", requirements={"id"="\d+"})
+     * @Route("/{_locale}/task/create", name="task_create")
+     * @Route("/{_locale}/task/update/{id}", name="task_update", requirements={"id"="\d+"})
      *
      * @param Request $request
      * @return void
@@ -87,7 +88,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/delete/{id}", name="task_delete", requirements={"id"="\d+"})
+     * @Route("/{_locale}/task/delete/{id}", name="task_delete", requirements={"id"="\d+"})
      *
      * @return Response
      */
