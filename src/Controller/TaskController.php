@@ -39,7 +39,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/{_locale}/task/listing", name="task_listing")
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         // Recuperer les informations de l'utilisateur connectee
         $user = $this->getUser();
@@ -49,7 +49,7 @@ class TaskController extends AbstractController
         $tasks = $this->repository->findAll();
 
         return $this->render('task/index.html.twig', [
-            'tasks' => $tasks,
+            'tasks' => $tasks, 'locale' => $request->getLocale()
         ]);
     }
 
