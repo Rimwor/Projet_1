@@ -49,6 +49,17 @@ class Task
      */
     private $dueAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Tag::class, inversedBy="tasks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $tag;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="tasks")
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,5 +113,27 @@ class Task
         return $this;
     }
 
+    public function getTag(): ?Tag
+    {
+        return $this->tag;
+    }
 
+    public function setTag(?Tag $tag): self
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 }

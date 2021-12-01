@@ -7,21 +7,65 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-												and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																								and uncomment the following Encore helpers to start using Symfony UX #}
 
-		<link rel="stylesheet" href="https://bootswatch.com/5/vapor/bootstrap.min.css"/>
 
 		{% block stylesheets %}
-			{#{{ encore_entry_link_tags('app') }}#}
+			<link rel="stylesheet" href="https://bootswatch.com/5/vapor/bootstrap.min.css"/>
+			<link rel="stylesheets" href="cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+			<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
 		{% endblock %}
 
 
 	</head>
 	<body>
+		<div>
+			<button>
+				<a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: 'en'})) }}">English</a>
+			</button>
+			<button>
+				<a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: 'fr'})) }}">French</a>
+			</button>
+		</div>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<p>{% trans from "messages" %}auth.msg{% endtrans %}
+				:
+				{{ app.user.email }}</p>
+			<a href="{{ path('app_logout') }}">{% trans from "messages" %}auth.logout{% endtrans %}</a>
+		{% endif %}
+
 		{% block body %}{% endblock %}
 	</body>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
 	{% block javascripts %}
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function () {
+$('#tasksTable').DataTable({
+
+language: {
+"sLengthMenu": "{% trans from 'messages' %}sLengthMenu                {% endtrans %}",
+"sSearch": "{% trans from 'messages' %}sSearch                {% endtrans %}",
+"sInfo": "{% trans from 'messages' %}sInfo                {% endtrans %}",
+"sInfoEmpty": "Showing 0 to 0 of 0 records",
+"sInfoFiltered": "(filtered from _MAX_ total records)",
+
+"paginate": {
+"first": "{% trans from 'messages' %}&nbsp; first &nbsp;                {% endtrans %}",
+"previous": "{% trans from 'messages' %}previous &nbsp;                 {% endtrans %}",
+"next": "{% trans from 'messages' %}&nbsp; next               {% endtrans %}",
+"last": "{% trans from 'messages' %}&nbsp; last &nbsp;                {% endtrans %}"
+}
+
+}
+});
+
+});
+		</script>
+
 		{#{{ encore_entry_script_tags('app') }}#}
 	{% endblock %}
 </html>
