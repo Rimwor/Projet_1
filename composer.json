@@ -72,7 +72,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "fakerphp/faker": "^1.16",
-        "symfony/maker-bundle": "^1.35",
+        "symfony/maker-bundle": "^1.36",
         "symfony/var-dumper": "5.3.*"
     }
 }
